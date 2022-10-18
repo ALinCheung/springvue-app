@@ -1,4 +1,4 @@
-package com.alin.springvue.app;
+package com.alin.springvue.app.server;
 
 
 import org.springframework.boot.WebApplicationType;

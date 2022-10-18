@@ -42,14 +42,20 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <java.main.class>com.alin.springvue.app.ServerApplication</java.main.class>
+        <java.main.class>com.alin.springvue.app.server.ServerApplication</java.main.class>
         <nodejs.version>v16.4.0</nodejs.version>
         <yarn.version>v1.22.10</yarn.version>
+        <h2database.version>1.4.200</h2database.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
+            <!-- 内存数据库 -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2database.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
