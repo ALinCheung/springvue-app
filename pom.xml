@@ -11,13 +11,14 @@
     </parent>
 
     <groupId>com.alin.springvue</groupId>
-    <artifactId>springvue-parent</artifactId>
+    <artifactId>springvue-app</artifactId>
     <version>1.0.0</version>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>server</module>
+        <module>springvue-backend</module>
+        <module>springvue-frontend</module>
     </modules>
 
     <properties>
