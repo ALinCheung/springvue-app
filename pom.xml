@@ -17,12 +17,94 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>springvue-backend</module>
-        <module>springvue-frontend</module>
+        <module>springvue-server</module>
+        <module>springvue-ui</module>
     </modules>
+
+    <repositories>
+        <!--阿里云仓库-->
+        <repository>
+            <id>central</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <!-- 是否开启发布版构件下载 -->
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <!-- 是否开启快照版构件下载 -->
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <java.main.class>com.alin.springvue.app.ServerApplication</java.main.class>
+        <nodejs.version>v16.4.0</nodejs.version>
+        <yarn.version>v1.22.10</yarn.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- 打包前端代码 -->
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>1.12.0</version>
+                    <configuration>
+                        <installDirectory>${user.home}/nodejs/${nodejs.version}</installDirectory>
+                    </configuration>
+                    <executions>
+                        <!-- 安装nodejs, yarn -->
+                        <execution>
+                            <id>install-node-and-yarn</id>
+                            <goals>
+                                <goal>install-node-and-yarn</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <nodeVersion>${nodejs.version}</nodeVersion>
+                                <yarnVersion>${yarn.version}</yarnVersion>
+                                <nodeDownloadRoot>http://npmmirror.com/mirrors/node/</nodeDownloadRoot>
+                                <yarnDownloadRoot>http://npmmirror.com/mirrors/yarn/</yarnDownloadRoot>
+                            </configuration>
+                        </execution>
+                        <!-- 引入依赖 -->
+                        <execution>
+                            <id>yarn-install</id>
+                            <goals>
+                                <goal>yarn</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <arguments>install --registry https://registry.npm.taobao.org
+                                </arguments>
+                            </configuration>
+                        </execution>
+                        <!-- 构建打包项目 -->
+                        <execution>
+                            <id>yarn-build</id>
+                            <goals>
+                                <goal>yarn</goal>
+                            </goals>
+                            <phase>compile</phase>
+                            <configuration>
+                                <arguments>run build</arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
