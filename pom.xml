@@ -82,7 +82,8 @@
                                 <nodeVersion>${nodejs.version}</nodeVersion>
                                 <yarnVersion>${yarn.version}</yarnVersion>
                                 <nodeDownloadRoot>http://npmmirror.com/mirrors/node/</nodeDownloadRoot>
-                                <yarnDownloadRoot>http://npmmirror.com/mirrors/yarn/</yarnDownloadRoot>
+                                <!-- yarn镜像失效 -->
+                                <!--<yarnDownloadRoot>https://registry.npmmirror.com/yarn/</yarnDownloadRoot>-->
                             </configuration>
                         </execution>
                         <!-- 引入依赖 -->
@@ -105,7 +106,7 @@
                             </goals>
                             <phase>compile</phase>
                             <configuration>
-                                <arguments>run build</arguments>
+                                <arguments>build</arguments>
                             </configuration>
                         </execution>
                     </executions>
