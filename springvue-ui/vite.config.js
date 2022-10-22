@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import legacy from '@vitejs/plugin-legacy'
+import eslintPlugin from 'vite-plugin-eslint'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode, ssrBuild }) => {
@@ -42,6 +43,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           'esnext.global-this',
           'esnext.string.match-all'
         ]
+      }),
+      // eslint代码规范
+      eslintPlugin({
+        include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
       })
     ]
   }
