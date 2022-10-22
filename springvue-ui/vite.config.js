@@ -15,10 +15,22 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
       }
     },
-    // 被plugin-legacy重写
-    /* build: {
-      target: 'es2015'
-    }, */
+    // 打包
+    build: {
+      outDir: "dist", // 指定打包输出路径
+      assetsDir: "assets", // 指定静态资源存放路径
+      minify: 'terser', // 混淆器,terser构建后文件体积更小
+      // target: "modules", // 指定es版本,浏览器的兼容性, 被plugin-legacy覆盖
+      sourcemap: false, // 是否构建source map 文件
+      cssCodeSplit: true, // css代码拆分,禁用则所有样式保存在一个css里面
+      chunkSizeWarningLimit: 1500, // 文件大小限制
+      terserOptions: {
+        compress: {
+          drop_console: true, // 生产环境移除console
+          drop_debugger: true // 生产环境移除debugger
+        }
+      },
+    },
     plugins: [
       vue(),
       // vite浏览器兼容
@@ -47,7 +59,14 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       }),
       // eslint代码规范
       eslintPlugin({
-        include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
+        include: [
+          'src/**/*.js',
+          'src/**/*.vue',
+          'src/**/*.ts',
+          'src/*.js',
+          'src/*.vue',
+          'src/*.ts'
+        ]
       })
     ]
   }
