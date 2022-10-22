@@ -15,9 +15,10 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
       }
     },
-    build: {
+    // 被plugin-legacy重写
+    /* build: {
       target: 'es2015'
-    },
+    }, */
     plugins: [
       vue(),
       // vite浏览器兼容
