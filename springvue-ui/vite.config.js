@@ -18,7 +18,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     // 打包
     build: {
       outDir: "dist", // 指定打包输出路径
-      assetsDir: "assets", // 指定静态资源存放路径
+      assetsDir: "static", // 指定静态资源存放路径
       minify: 'terser', // 混淆器,terser构建后文件体积更小
       // target: "modules", // 指定es版本,浏览器的兼容性, 被plugin-legacy覆盖
       sourcemap: false, // 是否构建source map 文件
@@ -30,6 +30,21 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
           drop_debugger: true // 生产环境移除debugger
         }
       },
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // 解决【Vue3】vite打包报错：块的大小超过限制，Some chunks are larger than 500kb after minification
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            }
+          },
+          chunkFileNames: (chunkInfo) => {
+            const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/'): [];
+            const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]';
+            return `modules/${fileName}/[name].[hash].js`;
+          }
+        }
+      }
     },
     plugins: [
       vue(),
