@@ -21,6 +21,7 @@
 - Vite 3 构建工具
 - Vue 3 前端框架
 - Element-plus 前端组件
+- Axios 网络请求库
 - Bable 语法兼容
 - Eslint 代码规范控制
 - Prettier 美化代码
