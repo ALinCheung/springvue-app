@@ -9,7 +9,7 @@ export default defineConfig(({ command }:ConfigEnv) => {
   const config = {
     base: '',
     server: {
-      port: 8001,
+      port: 8000,
       // 为开发服务器配置自定义代理规则
       proxy: {
 
