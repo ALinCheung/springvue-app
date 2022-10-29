@@ -10,14 +10,4 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>springvue-ui</artifactId>
-
-    <build>
-        <plugins>
-            <!-- 打包前端代码 -->
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
