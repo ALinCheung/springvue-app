@@ -12,10 +12,20 @@
     <artifactId>springvue-server</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <main>com.springvue.app.server.ServerApplication</main>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 同项目common -->
+        <dependency>
+            <groupId>com.alin.springvue</groupId>
+            <artifactId>springvue-common</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- 内存数据库 -->
         <dependency>
@@ -23,4 +33,18 @@
             <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- jar打包启动脚本 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+            </plugin>
+            <!-- 压缩打包 -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

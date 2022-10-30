@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+	
+	<id>bin</id>
+	
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<files>
+		<file>
+			<source>${project.build.directory}/generated-resources/appassembler/jsw/app/bin/app</source>
+			<lineEnding>unix</lineEnding>
+			<fileMode>0755</fileMode>
+			<outputDirectory>bin</outputDirectory>
+		</file>
+		<file>
+			<source>${project.build.directory}/generated-resources/appassembler/jsw/app/bin/app.bat</source>
+			<lineEnding>windows</lineEnding>
+			<outputDirectory>bin</outputDirectory>
+		</file>
+	</files>
+	<fileSets>
+		<fileSet>
+			<directory>${project.build.directory}/generated-resources/appassembler/jsw/app/bin</directory>
+			<fileMode>0755</fileMode>
+			<excludes>
+				<exclude>app</exclude>
+				<exclude>app.bat</exclude>
+			</excludes>
+			<outputDirectory>bin</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.directory}/generated-resources/appassembler/jsw/app</directory>
+			<excludes>
+				<exclude>bin</exclude>
+			</excludes>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${project.build.outputDirectory}</directory>
+			<includes>
+				<include>*.properties</include>
+				<include>*.yml</include>
+				<include>*.xml</include>
+			</includes>
+			 <outputDirectory>conf</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly> 
