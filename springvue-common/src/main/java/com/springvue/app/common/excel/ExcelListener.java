@@ -113,7 +113,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
                             extra.getFirstRowIndex(), extra.getFirstColumnIndex(), extra.getLastRowIndex(),
                             extra.getLastColumnIndex(), extra.getText());
                 } else {
-                    throw new RuntimeException("Unknown hyperlink!");
+                    log.error("Unknown hyperlink!");
                 }
                 break;
             case MERGE:
