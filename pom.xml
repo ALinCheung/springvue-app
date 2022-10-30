@@ -52,8 +52,10 @@
         <nodejs.version>v16.4.0</nodejs.version>
         <yarn.version>v1.22.10</yarn.version>
         <lombok.version>1.18.24</lombok.version>
+        <knife4j.version>2.0.9</knife4j.version>
         <hutool.version>5.8.9</hutool.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
         <h2database.version>1.4.200</h2database.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <easyexcel.version>3.1.2</easyexcel.version>
@@ -61,6 +63,12 @@
     </properties>
 
     <dependencies>
+        <!-- 测试 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- java代码注解 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -84,6 +92,19 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <!--使用Swagger2-->
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- 数据操作工具 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
             <!-- 内存数据库 -->
             <dependency>
                 <groupId>com.h2database</groupId>

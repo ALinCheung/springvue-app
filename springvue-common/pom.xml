@@ -12,6 +12,17 @@
     <artifactId>springvue-common</artifactId>
 
     <dependencies>
+        <!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <!--使用Swagger2-->
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- 数据操作工具 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
         <!-- Excel工具 -->
         <dependency>
             <groupId>com.alibaba</groupId>
