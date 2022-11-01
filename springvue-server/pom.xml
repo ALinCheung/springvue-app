@@ -17,10 +17,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!-- 同项目common -->
         <dependency>
             <groupId>com.alin.springvue</groupId>

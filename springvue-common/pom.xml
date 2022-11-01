@@ -12,6 +12,10 @@
     <artifactId>springvue-common</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
@@ -23,16 +27,15 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
         <!-- Excel工具 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
-        </dependency>
-        <!-- tomcat容器api -->
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
