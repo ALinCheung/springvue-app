@@ -11,6 +11,5 @@ public class BusinessException extends RuntimeException {
      */
     public BusinessException(String message) {
         super(message);
-        log.info("业务异常, 原因: {}", message);
     }
 }

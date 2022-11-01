@@ -1,4 +1,4 @@
-package com.springvue.app.common.wrapper;
+package com.springvue.app.common.model;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.function.Function;
  */
 @ApiModel(description = "分页查询入参")
 @Data
+@Accessors(chain = true)
 public class PageParams<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
