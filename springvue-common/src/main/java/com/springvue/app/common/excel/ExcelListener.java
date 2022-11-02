@@ -8,6 +8,7 @@ import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.util.ListUtils;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -26,19 +27,29 @@ import java.util.function.Consumer;
 public class ExcelListener<T> extends AnalysisEventListener<T> {
 
     /**
+     * 模块名
+     */
+    private String module = null;
+
+    /**
      * 读取总条数
      */
     private int count = 0;
 
     /**
+     * 失败条数
+     */
+    private int failCount = 0;
+
+    /**
      * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收
      */
-    private int BATCH_COUNT = 100;
+    private int batchCount = 100;
 
     /**
      * 缓存的数据
      */
-    private List<T> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
+    private List<T> cachedDataList = ListUtils.newArrayListWithExpectedSize(batchCount);
 
     /**
      * 消费者
@@ -49,10 +60,16 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
         this.consumer = consumer;
     }
 
-    public ExcelListener(int BATCH_COUNT, Consumer<List<T>> consumer) {
-        this.BATCH_COUNT = BATCH_COUNT;
+    public ExcelListener(String module, Consumer<List<T>> consumer) {
+        this.module = StringUtils.isNotBlank(module) ? module + "模块, " : "";
         this.consumer = consumer;
-        cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
+    }
+
+    public ExcelListener(String module, int batchCount, Consumer<List<T>> consumer) {
+        this.module = StringUtils.isNotBlank(module) ? module + "模块, " : "";
+        this.batchCount = batchCount;
+        this.consumer = consumer;
+        cachedDataList = ListUtils.newArrayListWithExpectedSize(batchCount);
     }
 
     @Override
@@ -60,14 +77,14 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
         //设置忽略空行
         context.readWorkbookHolder().setIgnoreEmptyRow(false);
 
-        log.info("解析到一条数据:{}", data.toString());
+        log.debug("{}解析到一条数据:{}", module, data.toString());
         count++;
         cachedDataList.add(data);
         // 达到BATCH_COUNT了，需要去处理一次，防止数据几万条数据在内存，容易OOM
-        if (cachedDataList.size() >= BATCH_COUNT) {
+        if (cachedDataList.size() >= batchCount) {
             callback();
             // 处理完成清理 list
-            cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
+            cachedDataList = ListUtils.newArrayListWithExpectedSize(batchCount);
         }
     }
 
@@ -80,7 +97,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要处理数据，确保最后遗留的数据也处理了
         callback();
-        log.info("所有数据解析完成！总条数:{}", count);
+        log.info("{}所有数据解析完成！总条数:{}, 失败条数:{}", module, count, failCount);
     }
 
     /**
@@ -91,7 +108,7 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
      */
     @Override
     public void invokeHeadMap(Map<Integer, String> headMap, AnalysisContext context) {
-        log.info("解析到一条头数据:{}", headMap.toString());
+        log.info("{}解析到一条头数据:{}", module, headMap.toString());
     }
 
     @Override
@@ -145,12 +162,13 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
      */
     @Override
     public void onException(Exception exception, AnalysisContext context) {
-        log.error("解析失败，但是继续解析下一行:{}", exception.getMessage());
+        failCount++;
+        log.error("{}解析失败，但是继续解析下一行:{}", module, exception.getMessage());
         // 如果是某一个单元格的转换异常 能获取到具体行号
         // 如果要获取头的信息 配合invokeHeadMap使用
         if (exception instanceof ExcelDataConvertException) {
             ExcelDataConvertException excelDataConvertException = (ExcelDataConvertException) exception;
-            log.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
+            log.error("{}第{}行，第{}列解析异常，数据为:{}", module, excelDataConvertException.getRowIndex(),
                     excelDataConvertException.getColumnIndex(), excelDataConvertException.getCellData());
         }
     }
@@ -160,11 +178,11 @@ public class ExcelListener<T> extends AnalysisEventListener<T> {
      */
     private void callback() {
         if (consumer != null) {
-            log.info("{}条数据，开始处理数据！", cachedDataList.size());
+            log.info("{}开始处理第{}条数据！批总数{}条", module, count - cachedDataList.size() + 1, cachedDataList.size());
             consumer.accept(cachedDataList);
-            log.info("{}条数据，处理数据成功！", cachedDataList.size());
+            log.info("{}处理第{}条到第{}条数据成功！批总数{}条", module, count - cachedDataList.size() + 1, count, cachedDataList.size());
         } else {
-            log.error("没有回调函数！");
+            log.error("{}没有回调函数！", module);
         }
     }
 }
