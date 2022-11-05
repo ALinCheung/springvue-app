@@ -2,11 +2,7 @@ import axios from "axios";
 import { ElMessage } from "element-plus"; // 引入el 提示框，这个项目里用什么组件库这里引什么
 
 // 请求白名单
-const WHITE_URL_LIST = [
-  `${process.env.VUE_APP_MENUS_URL}/system/info`,
-  `${process.env.VUE_APP_MENUS_URL}/menus/trees`,
-  `${process.env.VUE_APP_MENUS_URL}/apps`,
-];
+const WHITE_URL_LIST = [];
 
 // 定义axios配置
 const http = axios.create({

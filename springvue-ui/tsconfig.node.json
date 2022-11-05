@@ -6,6 +6,7 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
+    "packages/portal/vite.config.ts",
     "packages/frame/vite.config.ts"
   ]
 }

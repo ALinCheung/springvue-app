@@ -1,12 +1,15 @@
 {
   "name": "frame",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --fix  --ext .js,.vue,.ts ./src/"
+  },
+  "dependencies": {
+    "common": "^1.0.0"
   }
 }

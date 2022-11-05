@@ -4,10 +4,19 @@ module.exports = {
     node: true,
     "vue/setup-compiler-macros": true,
   },
-  extends: ["eslint:recommended", "plugin:vue/vue3-recommended", "prettier"],
-  plugins: ["vue", "html", "prettier"],
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
+  plugins: ["vue", "html", "prettier", "@typescript-eslint"],
+  parser: "vue-eslint-parser",
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: "latest",
+    parser: "@typescript-eslint/parser",
+    sourceType: "module",
   },
   rules: {
     "prettier/prettier": "error",
@@ -17,16 +26,5 @@ module.exports = {
     "vue/multi-word-component-names": "off",
     "no-mutating-props": "off",
     "vue/no-v-html": "off",
-  },
-  overrides: [
-    {
-      files: [
-        "**/__tests__/*.{j,t}s?(x)",
-        "**/tests/unit/**/*.spec.{j,t}s?(x)",
-      ],
-      env: {
-        mocha: true,
-      },
-    },
-  ],
+  }
 };
