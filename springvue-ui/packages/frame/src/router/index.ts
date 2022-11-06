@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "/HelloWorld",
         component: () => import("@/components/HelloWorld.vue"),
         meta: {
-          title: "HelloWorld",
+          title: "首页",
         },
       },
     ],
