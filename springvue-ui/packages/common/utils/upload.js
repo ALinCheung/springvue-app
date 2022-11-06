@@ -1,4 +1,4 @@
-import request from "./request";
+import request from "./request.js";
 
 //正常上传
 const upload = (url, data, progress) => {

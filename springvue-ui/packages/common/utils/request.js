@@ -5,7 +5,7 @@ import { ElMessage } from "element-plus"; // 引入el 提示框，这个项目�
 const WHITE_URL_LIST = [];
 
 // 定义axios配置
-const http = axios.create({
+const request = axios.create({
   baseURL: "/", // 请求地址，这里是动态赋值的的环境变量
   withCredentials: true, // 开启跨域身份凭证
   method: "post",
@@ -94,4 +94,4 @@ const showMessage = (status) => {
 };
 
 // 封装 GET POST 请求并导出
-export default http;
+export default request;

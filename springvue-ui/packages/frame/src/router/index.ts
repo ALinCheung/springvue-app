@@ -1,9 +1,11 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { layout } from "common";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     redirect: "/HelloWorld",
+    component: layout,
     children: [
       {
         path: "/HelloWorld",
