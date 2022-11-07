@@ -26,5 +26,6 @@ module.exports = {
     "vue/multi-word-component-names": "off",
     "no-mutating-props": "off",
     "vue/no-v-html": "off",
-  }
+    "linebreak-style": ["off", "windows"],
+  },
 };
