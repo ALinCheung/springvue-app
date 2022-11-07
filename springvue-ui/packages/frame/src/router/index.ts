@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import { layout } from "common";
 
-const routes: Array<RouteRecordRaw> = [
+const staticRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
     redirect: "/HelloWorld",
@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "/HelloWorld",
-        component: () => import("@/components/HelloWorld.vue"),
+        component: () => import("@/views/HelloWorld.vue"),
         meta: {
           title: "首页",
         },
@@ -18,9 +18,25 @@ const routes: Array<RouteRecordRaw> = [
   },
 ];
 
+const dynamicRoutes: Array<RouteRecordRaw> = [
+  {
+    path: "/uploadByPieces",
+    component: layout,
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/uploadByPieces.vue"),
+        meta: {
+          title: "分片上传",
+        },
+      },
+    ],
+  },
+];
+
 const router = createRouter({
   history: createWebHashHistory(),
-  routes,
+  routes: staticRoutes.concat(dynamicRoutes),
 });
 
 export default router;

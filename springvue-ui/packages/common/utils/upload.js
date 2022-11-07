@@ -56,6 +56,7 @@ const uploadByPieces = async (url, { file }) => {
       promiseList.push(readChunk(index));
     }
     const res = await Promise.all(promiseList);
+    console.log(res);
     return res;
   } catch (e) {
     return e;
