@@ -16,7 +16,6 @@ export default defineConfig(({ command }: ConfigEnv) => {
         "/api": {
           target: "http://localhost:8080/server",
           rewrite: (path) => {
-            console.log(path); // 打印[/api/userInfo] 这就是http-proxy要请求的url,我们基地址实际是没有/api 所以replace掉
             return path.replace(/^\/api/, "");
           },
         },
