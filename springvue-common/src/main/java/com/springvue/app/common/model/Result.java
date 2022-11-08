@@ -36,6 +36,14 @@ public class Result<T> implements Serializable {
         return new Result<T>().setCode(CommonConstant.SUCCESS).setMsg(CommonConstant.SUCCESS_TEXT).setData(data);
     }
 
+    public static Result process() {
+        return new Result().setCode(CommonConstant.PROCESS).setMsg(CommonConstant.PROCESS_TEXT);
+    }
+
+    public static <T> Result<T> process(T data) {
+        return new Result<T>().setCode(CommonConstant.PROCESS).setMsg(CommonConstant.PROCESS_TEXT).setData(data);
+    }
+
     public static Result fail() {
         return new Result().setCode(CommonConstant.FAIL).setMsg(CommonConstant.FAIL_TEXT);
     }

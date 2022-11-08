@@ -43,10 +43,11 @@ import { ElMessageBox } from "element-plus";
 import type { UploadInstance } from "element-plus";
 import { UploadRequestOptions } from "element-plus/es/components/upload/src/upload";
 import { upload } from "@/api/upload";
+import { AxiosResponse } from "axios";
 
 const uploadRef = ref<UploadInstance>();
 const dialog = reactive({
-  visible: true,
+  visible: false,
   title: "上传中...",
   uploadStatus: "processing",
   uploadStatusText: "上传中",
@@ -77,11 +78,21 @@ const uploadRequest = (options: UploadRequestOptions) => {
       }
     }
   )
-    .then((res) => {
-      dialog.title = "提示";
-      dialog.uploadStatus = "success";
-      dialog.uploadStatusText = "上传成功";
-      console.log(res);
+    .then((res: Array<AxiosResponse>) => {
+      for (let { data } of res) {
+        if (data.code == 0) {
+          dialog.title = "提示";
+          dialog.uploadStatus = "success";
+          dialog.uploadStatusText = "上传成功";
+          return;
+        }
+        if (data.code == -1) {
+          dialog.title = "提示";
+          dialog.uploadStatus = "fail";
+          dialog.uploadStatusText = "上传失败, 原因: " + data.msg;
+          return;
+        }
+      }
     })
     .catch((err) => {
       dialog.title = "提示";
