@@ -61,6 +61,7 @@
         <fastjson.version>1.2.83</fastjson.version>
         <easyexcel.version>3.1.2</easyexcel.version>
         <javacsv.version>2.0</javacsv.version>
+        <kaptcha.version>1.1.0</kaptcha.version>
     </properties>
 
     <dependencies>
@@ -135,6 +136,12 @@
                 <groupId>net.sourceforge.javacsv</groupId>
                 <artifactId>javacsv</artifactId>
                 <version>${javacsv.version}</version>
+            </dependency>
+            <!-- 验证码 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>kaptcha-spring-boot-starter</artifactId>
+                <version>${kaptcha.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
