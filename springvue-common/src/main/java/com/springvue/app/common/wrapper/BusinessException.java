@@ -1,4 +1,4 @@
-package com.springvue.app.common.exception;
+package com.springvue.app.common.wrapper;
 
 import lombok.extern.slf4j.Slf4j;
 

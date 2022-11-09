@@ -1,6 +1,6 @@
 package com.springvue.app.common.component;
 
-import com.springvue.app.common.exception.BusinessException;
+import com.springvue.app.common.wrapper.BusinessException;
 import com.springvue.app.common.model.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

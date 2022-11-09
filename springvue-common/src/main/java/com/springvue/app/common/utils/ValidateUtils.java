@@ -1,6 +1,6 @@
 package com.springvue.app.common.utils;
 
-import com.springvue.app.common.exception.BusinessException;
+import com.springvue.app.common.wrapper.BusinessException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

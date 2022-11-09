@@ -1,7 +1,7 @@
 package com.springvue.app.common.utils;
 
 import cn.hutool.core.io.FileUtil;
-import com.springvue.app.common.exception.BusinessException;
+import com.springvue.app.common.wrapper.BusinessException;
 import com.springvue.app.common.model.UploadChunk;
 import org.apache.commons.lang3.StringUtils;
 
