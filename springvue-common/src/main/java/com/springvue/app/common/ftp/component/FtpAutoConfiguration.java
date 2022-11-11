@@ -5,7 +5,6 @@ import com.springvue.app.common.ftp.properties.FtpPoolProperties;
 import com.springvue.app.common.ftp.properties.FtpProperties;
 import com.springvue.app.common.ftp.properties.FtpServerProperties;
 import com.springvue.app.common.ftp.session.FtpSession;
-import com.springvue.app.common.ftp.template.FtpTemplate;
 import com.springvue.app.common.ftp.util.FtpUtils;
 import org.apache.commons.pool2.KeyedObjectPool;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;

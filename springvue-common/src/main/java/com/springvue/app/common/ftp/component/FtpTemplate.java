@@ -1,4 +1,4 @@
-package com.springvue.app.common.ftp.template;
+package com.springvue.app.common.ftp.component;
 
 import com.springvue.app.common.ftp.model.RemoteFile;
 import com.springvue.app.common.ftp.config.FtpConfig;
