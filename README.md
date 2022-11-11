@@ -13,6 +13,8 @@
 - Nodejs 16 前端环境
 - Npm 8/Yarn 1.2 包管理工具
 - com.github.eirslett.frontend-maven-plugin 前端构建工具
+- org.codehaus.mojo.appassembler-maven-plugin jar打包启动脚本构建工具
+- maven-assembly-plugin 压缩打包工具
 
 ### 前端
 
@@ -20,6 +22,8 @@
 
 - Vite 3 构建工具
 - Vue 3 前端框架
+- Vue-router 路由组件
+- Vuex 状态管理组件
 - Element-plus 前端组件
 - Axios 网络请求库
 - Bable 语法兼容
@@ -34,4 +38,13 @@
 主要技术：
 
 - SpringBoot 5 构建工具
+- Knife4j Swagger2 Restful Api文档工具
 - H2 Datasource 本地数据库
+- Mybatis-plus 数据访问框架
+- Lombok Java代码注解工具
+- Hutool 公共工具类库
+- Fastjson Json工具
+- EasyExcel Excel工具
+- Javacsv Csv工具
+- commons-pool2/common-net/jsch Ftp工具
+- Kaptcha 验证码工具
