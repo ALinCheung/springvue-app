@@ -20,3 +20,10 @@ package-lock.json
 target
 .class
 
+### h2 ###
+*.lock.db
+*.trace.db
+
+### Project ###
+*.log
+

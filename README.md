@@ -12,6 +12,7 @@
 - Maven 3.6.x 工程项目构建工具
 - Nodejs 16 前端环境
 - Npm 8/Yarn 1.2 包管理工具
+- Lerna 项目管理工具
 - com.github.eirslett.frontend-maven-plugin 前端构建工具
 - org.codehaus.mojo.appassembler-maven-plugin jar打包启动脚本构建工具
 - maven-assembly-plugin 压缩打包工具
