@@ -17,10 +17,22 @@
     </properties>
 
     <dependencies>
+        <!-- 前端界面 -->
+        <dependency>
+            <groupId>com.springvue.app</groupId>
+            <artifactId>springvue-ui</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- 同项目common -->
         <dependency>
             <groupId>com.springvue.app</groupId>
             <artifactId>springvue-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- 同项目Api接口核心 -->
+        <dependency>
+            <groupId>com.springvue.app</groupId>
+            <artifactId>springvue-api-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- 内存数据库 -->

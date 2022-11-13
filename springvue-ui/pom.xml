@@ -2,12 +2,174 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.springvue.app</groupId>
-        <artifactId>springvue-app</artifactId>
-        <version>1.0.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.springvue.app</groupId>
     <artifactId>springvue-ui</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <nodejs.version>v16.4.0</nodejs.version>
+        <yarn.version>v1.22.10</yarn.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- 打包前端代码 -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.12.0</version>
+                <configuration>
+                    <installDirectory>${user.home}/nodejs/${nodejs.version}</installDirectory>
+                </configuration>
+                <executions>
+                    <!-- 安装nodejs, yarn -->
+                    <execution>
+                        <id>install-node-and-yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>${nodejs.version}</nodeVersion>
+                            <yarnVersion>${yarn.version}</yarnVersion>
+                            <nodeDownloadRoot>http://npmmirror.com/mirrors/node/</nodeDownloadRoot>
+                            <!-- yarn镜像失效 -->
+                            <!--<yarnDownloadRoot>https://registry.npmmirror.com/yarn/</yarnDownloadRoot>-->
+                        </configuration>
+                    </execution>
+                    <!-- 引入依赖 -->
+                    <execution>
+                        <id>yarn-install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <arguments>install --registry https://registry.npm.taobao.org
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <!-- 构建打包项目 portal -->
+                    <execution>
+                        <id>yarn-portal-build</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <arguments>portal-build</arguments>
+                        </configuration>
+                    </execution>
+                    <!-- 构建打包项目 frame -->
+                    <execution>
+                        <id>yarn-frame-build</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <arguments>frame-build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 添加资源 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <!-- 输出portal项目资源 -->
+                    <execution>
+                        <id>copy-portal-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/portal</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/packages/portal/dist</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!-- 输出frame项目资源 -->
+                    <execution>
+                        <id>copy-frame-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/frame</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/packages/frame/dist</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <!-- 前端打包成jar -->
+                    <execution>
+                        <id>copy-static-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/packages/frame/dist</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 压缩打包 -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <!-- 压缩portal项目 -->
+                    <execution>
+                        <id>portal</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <finalName>${project.name}</finalName>
+                            <descriptors>
+                                <descriptor>assembly/portal.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <!-- 压缩frame项目 -->
+                    <execution>
+                        <id>frame</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>true</appendAssemblyId>
+                            <finalName>${project.name}</finalName>
+                            <descriptors>
+                                <descriptor>assembly/frame.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

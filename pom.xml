@@ -52,8 +52,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
         <nacos.version>2.2.9.RELEASE</nacos.version>
-        <nodejs.version>v16.4.0</nodejs.version>
-        <yarn.version>v1.22.10</yarn.version>
         <lombok.version>1.18.24</lombok.version>
         <knife4j.version>2.0.9</knife4j.version>
         <hutool.version>5.8.9</hutool.version>
@@ -213,55 +211,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <!-- 打包前端代码 -->
-                <plugin>
-                    <groupId>com.github.eirslett</groupId>
-                    <artifactId>frontend-maven-plugin</artifactId>
-                    <version>1.12.0</version>
-                    <configuration>
-                        <installDirectory>${user.home}/nodejs/${nodejs.version}</installDirectory>
-                    </configuration>
-                    <executions>
-                        <!-- 安装nodejs, yarn -->
-                        <execution>
-                            <id>install-node-and-yarn</id>
-                            <goals>
-                                <goal>install-node-and-yarn</goal>
-                            </goals>
-                            <phase>generate-resources</phase>
-                            <configuration>
-                                <nodeVersion>${nodejs.version}</nodeVersion>
-                                <yarnVersion>${yarn.version}</yarnVersion>
-                                <nodeDownloadRoot>http://npmmirror.com/mirrors/node/</nodeDownloadRoot>
-                                <!-- yarn镜像失效 -->
-                                <!--<yarnDownloadRoot>https://registry.npmmirror.com/yarn/</yarnDownloadRoot>-->
-                            </configuration>
-                        </execution>
-                        <!-- 引入依赖 -->
-                        <execution>
-                            <id>yarn-install</id>
-                            <goals>
-                                <goal>yarn</goal>
-                            </goals>
-                            <phase>generate-resources</phase>
-                            <configuration>
-                                <arguments>install --registry https://registry.npm.taobao.org
-                                </arguments>
-                            </configuration>
-                        </execution>
-                        <!-- 构建打包项目 -->
-                        <execution>
-                            <id>yarn-build</id>
-                            <goals>
-                                <goal>yarn</goal>
-                            </goals>
-                            <phase>compile</phase>
-                            <configuration>
-                                <arguments>build</arguments>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
                 <!-- jar打包启动脚本 -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>

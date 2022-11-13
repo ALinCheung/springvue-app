@@ -36,4 +36,17 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- jar打包启动脚本 -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+            </plugin>
+            <!-- 压缩打包 -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
