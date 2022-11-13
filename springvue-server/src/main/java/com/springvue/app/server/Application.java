@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication(scanBasePackages = {"com.springvue.app"})
-public class ServerApplication {
+public class Application {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(ServerApplication.class)
+        new SpringApplicationBuilder(Application.class)
                 .web(WebApplicationType.SERVLET)
                 .run(args);
     }

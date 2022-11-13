@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	<springProperty scope="context" name="appName" source="spring.application.name" defaultValue="spring"/>
+	<property name="LOG_FILE" value="logs/${appName}.log"/>
+	<springProfile name="!local">
+		<!-- 正常日志文件 -->
+		<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<encoder>
+				<pattern>${FILE_LOG_PATTERN}</pattern>
+			</encoder>
+			<file>${LOG_FILE}</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+				<!--日志文件输出的文件名 -->
+				<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+				<maxHistory>15</maxHistory>
+				<maxFileSize>100MB</maxFileSize>
+				<totalSizeCap>1GB</totalSizeCap>
+			</rollingPolicy>
+		</appender>
+		<!-- 错误日志文件 -->
+		<appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<encoder>
+				<pattern>${FILE_LOG_PATTERN}</pattern>
+			</encoder>
+			<file>${LOG_FILE}</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+				<!--日志文件输出的文件名 -->
+				<fileNamePattern>${LOG_FILE}.error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+				<maxHistory>15</maxHistory>
+				<maxFileSize>100MB</maxFileSize>
+				<totalSizeCap>1GB</totalSizeCap>
+			</rollingPolicy>
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>ERROR</level>
+			</filter>
+		</appender>
+		<root level="INFO">
+			<appender-ref ref="FILE"/>
+			<appender-ref ref="ERROR_FILE"/>
+		</root>
+	</springProfile>
+	<springProfile name="local">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE"/>
+		</root>
+	</springProfile>
+</configuration>
