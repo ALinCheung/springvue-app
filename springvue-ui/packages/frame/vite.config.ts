@@ -1,11 +1,12 @@
-import { ConfigEnv, defineConfig } from "vite";
+import { ConfigEnv, defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import legacy from "@vitejs/plugin-legacy";
 import eslintPlugin from "vite-plugin-eslint";
 import * as path from "path";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }: ConfigEnv) => {
+export default defineConfig(({ command, mode }: ConfigEnv) => {
+  const env = loadEnv(mode, __dirname);
   // 公共配置
   const config = {
     base: "",
@@ -14,7 +15,7 @@ export default defineConfig(({ command }: ConfigEnv) => {
       // 为开发服务器配置自定义代理规则
       proxy: {
         "/api": {
-          target: "http://localhost:8080/server",
+          target: env.VITE_BASE_URL,
           rewrite: (path) => {
             return path.replace(/^\/api/, "");
           },

@@ -8,6 +8,10 @@ import router from "./router";
 
 const app = createApp(App);
 
+if (import.meta.env.DEV) {
+  window.config.api_url = "/api";
+}
+
 app
   .use(router)
   .use(ElementPlus, {

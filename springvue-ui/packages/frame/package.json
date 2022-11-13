@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "eslint --fix  --ext .js,.vue,.ts ./src/ && vue-tsc && vite build",
+    "dev": "vite serve --mode development",
+    "build": "eslint --fix  --ext .js,.vue,.ts ./src/ && vue-tsc && vite build --mode production",
     "preview": "vite preview"
   },
   "dependencies": {

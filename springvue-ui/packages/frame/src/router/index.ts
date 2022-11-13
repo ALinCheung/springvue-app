@@ -4,12 +4,12 @@ import { layout } from "common";
 const staticRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: "/HelloWorld",
+    redirect: "/home",
     component: layout,
     children: [
       {
-        path: "/HelloWorld",
-        component: () => import("@/views/HelloWorld.vue"),
+        path: "/home",
+        component: () => import("@/views/home.vue"),
         meta: {
           title: "首页",
         },

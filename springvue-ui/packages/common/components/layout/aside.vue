@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="1" class="el-menu-vertical-demo">
+  <el-menu default-active="0" class="el-menu-vertical-demo">
     <el-menu-item
       v-for="menu in menus"
       :key="menu.path"
