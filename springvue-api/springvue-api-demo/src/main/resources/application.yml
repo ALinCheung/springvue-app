@@ -1,0 +1,48 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /demo
+  tomcat:
+    accesslog:
+      enabled: true
+    remoteip:
+      protocol-header: x-forwarded-proto
+      remote-ip-header: x-forwarded-for
+
+spring:
+  application:
+    name: springvue-api-demo
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:h2:./data/demo;AUTO_SERVER=TRUE;MODE=MYSQL}
+    driver-class-name: ${DATASOURCE_DRIVER:org.h2.Driver}
+    username: ${DATASOURCE_USERNAME:admin}
+    password: ${DATASOURCE_PASSWORD:admin}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 20
+      pool-name: DatebookHikariCP
+      connection-timeout: 30000
+      idle-timeout: 600000
+      connection-test-query: ${TEST_QUERY:select 1 from dual}
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations:
+    - classpath*:mapper/**/*.xml
+  global-config:
+    db-config:
+      capital-mode: true

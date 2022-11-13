@@ -3,24 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
+        <artifactId>springvue-api</artifactId>
         <groupId>com.springvue.app</groupId>
-        <artifactId>springvue-app</artifactId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springvue-server</artifactId>
+    <artifactId>springvue-api-demo</artifactId>
     <packaging>jar</packaging>
 
     <properties>
-        <main>com.springvue.app.server.Application</main>
+        <main>com.springvue.app.api.demo.Application</main>
     </properties>
 
     <dependencies>
-        <!-- 同项目common -->
+        <!-- 公共模块 -->
         <dependency>
             <groupId>com.springvue.app</groupId>
             <artifactId>springvue-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Api核心模块 -->
+        <dependency>
+            <groupId>com.springvue.app</groupId>
+            <artifactId>springvue-api-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- 内存数据库 -->
@@ -30,17 +36,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- jar打包启动脚本 -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-            </plugin>
-            <!-- 压缩打包 -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>

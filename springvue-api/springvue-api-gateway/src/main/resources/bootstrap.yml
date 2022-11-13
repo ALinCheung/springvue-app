@@ -1,0 +1,39 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: springvue-api-gateway
+  webflux:
+    static-path-pattern: /api/**
+  cloud:
+    nacos:
+      discovery:
+        ip: localhost
+        port: 8848
+    gateway:
+      x-forwarded:
+        prefix-enabled: false
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          filters:
+            - StripPrefix=1
+      globalcors:
+        cors-configurations:spring:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      default-filters:
+        - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+      routes:
+        - id: springvue-api-demo
+          uri: lb://springvue-api-demo
+          predicates:
+            - Path=/api/demo/**
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1

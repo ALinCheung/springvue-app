@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        ip: localhost
+        port: 8848

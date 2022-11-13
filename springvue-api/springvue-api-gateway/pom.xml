@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>springvue-api</artifactId>
+		<groupId>com.springvue.app</groupId>
+		<version>1.0.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>springvue-api-gateway</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<main>com.springvue.app.api.gateway.Application</main>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- jar打包启动脚本 -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<configuration>
+					<defaultJvmSettings>
+						<maxMemorySize>128M</maxMemorySize>
+					</defaultJvmSettings>
+				</configuration>
+			</plugin>
+			<!-- 压缩打包 -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
