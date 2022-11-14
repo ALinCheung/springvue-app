@@ -29,16 +29,6 @@
             <artifactId>springvue-api-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- nacos 配置中心 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <!-- nacos 的服务注册与发现 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
         <!-- 内存数据库 -->
         <dependency>
             <groupId>com.h2database</groupId>

@@ -85,6 +85,12 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j.version}</version>
+        </dependency>
         <!-- Java工具类库 -->
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -120,12 +126,6 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
                 <version>${nacos.version}</version>
-            </dependency>
-            <!--引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目-->
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${knife4j.version}</version>
             </dependency>
             <!-- 数据操作工具 -->
             <dependency>

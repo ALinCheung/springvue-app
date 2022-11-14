@@ -39,7 +39,9 @@
 主要技术：
 
 - SpringBoot 5 构建工具
+- Spring Gateway 网关组件
 - Knife4j Swagger2 Restful Api文档工具
+- Nacos 配置中心/服务中心
 - H2 Datasource 本地数据库
 - Mybatis-plus 数据访问框架
 - Lombok Java代码注解工具
@@ -49,3 +51,11 @@
 - Javacsv Csv工具
 - commons-pool2/common-net/jsch Ftp工具
 - Kaptcha 验证码工具
+
+### 1. 命令
+
+打包, 根目录执行
+
+```
+mvn clean install -Dmaven.test.skip=true
+```

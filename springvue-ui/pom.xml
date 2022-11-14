@@ -9,6 +9,8 @@
     <version>1.0.0</version>
 
     <properties>
+        <!--编译编码-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <nodejs.version>v16.4.0</nodejs.version>
         <yarn.version>v1.22.10</yarn.version>
     </properties>

@@ -27,5 +27,6 @@ module.exports = {
     "no-mutating-props": "off",
     "vue/no-v-html": "off",
     "linebreak-style": ["off", "windows"],
+    "@typescript-eslint/no-explicit-any": ["off"],
   },
 };
