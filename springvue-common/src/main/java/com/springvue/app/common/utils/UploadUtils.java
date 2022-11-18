@@ -1,7 +1,6 @@
 package com.springvue.app.common.utils;
 
 import cn.hutool.core.io.FileUtil;
-import com.springvue.app.common.wrapper.BusinessException;
 import com.springvue.app.common.model.UploadChunk;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,10 +30,10 @@ public class UploadUtils {
             // 校验参数
             ValidateUtils.entity(params);
             if (StringUtils.isBlank(tempDir)) {
-                throw new BusinessException("临时文件夹路径不能为空");
+                throw new IllegalArgumentException("临时文件夹路径不能为空");
             }
             if (StringUtils.isBlank(output)) {
-                throw new BusinessException("输出文件路径不能为空");
+                throw new IllegalArgumentException("输出文件路径不能为空");
             }
             // 临时文件夹
             tempPath = FileUtil.file(tempDir + File.separator + params.getUuid());

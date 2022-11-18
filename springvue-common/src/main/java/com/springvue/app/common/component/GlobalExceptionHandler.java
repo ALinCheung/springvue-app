@@ -95,7 +95,7 @@ public class GlobalExceptionHandler {
      * @param method
      * @return
      */
-    @ExceptionHandler(BusinessException.class)
+    @ExceptionHandler({BusinessException.class, IllegalArgumentException.class})
     @ResponseStatus(HttpStatus.OK)
     public Result businessExceptionHandler(Exception e, HandlerMethod method) {
         log.info(getMethodSchema(method) + "失败, 原因:{}", e.getMessage());

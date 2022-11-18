@@ -1,7 +1,5 @@
 package com.springvue.app.common.utils;
 
-import com.springvue.app.common.wrapper.BusinessException;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -23,7 +21,7 @@ public class ValidateUtils {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(t);
         constraintViolations.forEach(error -> {
-            throw new BusinessException(error.getMessage());
+            throw new IllegalArgumentException(error.getMessage());
         });
     }
 }
