@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  * 线程工具
  */
 @Slf4j
-public class ExecutorUtil {
+public class ExecutorUtils {
 
     /**
      * 默认尝试锁秒数
@@ -34,15 +34,15 @@ public class ExecutorUtil {
      * 线程锁
      */
     public static void lock(Consumer<Void> consumer) {
-        ExecutorUtil.lock(consumer, DEFAULT_THREAD_NAME, null);
+        ExecutorUtils.lock(consumer, DEFAULT_THREAD_NAME, null);
     }
 
     public static void lock(Consumer<Void> consumer, Integer second) {
-        ExecutorUtil.lock(consumer, DEFAULT_THREAD_NAME, second);
+        ExecutorUtils.lock(consumer, DEFAULT_THREAD_NAME, second);
     }
 
     public static void lock(Consumer<Void> consumer, String threadName) {
-        ExecutorUtil.lock(consumer, threadName, null);
+        ExecutorUtils.lock(consumer, threadName, null);
     }
 
     public static void lock(Consumer<Void> consumer, String threadName, Integer second) {
