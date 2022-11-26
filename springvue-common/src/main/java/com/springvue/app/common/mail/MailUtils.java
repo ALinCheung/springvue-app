@@ -202,7 +202,7 @@ public class MailUtils {
             for (Message o : messages) {
                 MimeMessage msg = (MimeMessage) o;
                 // 自定义判断条件
-                if (msg.getMessageID() != null && predicate.test(msg.getMessageID(), MailUtils.getDate(msg))) {
+                if (msg.getMessageID() != null && predicate != null && predicate.test(msg.getMessageID(), MailUtils.getDate(msg))) {
                     matchMsgList.add(msg);
                 }
             }
@@ -213,9 +213,11 @@ public class MailUtils {
                         // 初始化邮件信息
                         ImapMail mail = MailUtils.initEmail(properties, message);
                         // 自定义处理逻辑
-                        consumer.accept(mail);
+                        if (consumer != null) {
+                            consumer.accept(mail);
+                        }
                     } catch (Exception e) {
-                        log.error("处理邮箱[{}]邮件[{}]异常, 原因: {}", ((InternetAddress) message.getFrom()[0]).getAddress(), MimeUtility.decodeText(message.getSubject()), e.getMessage(), e);
+                        log.error("处理邮箱[{}]邮件[{}]异常, 继续执行下一封, 原因: {}", ((InternetAddress) message.getFrom()[0]).getAddress(), MimeUtility.decodeText(message.getSubject()), e.getMessage(), e);
                     }
                 }
                 log.info("循环处理邮件[{}]封, 符合条件邮件[{}]封!", messages.length, matchMsgList.size());
