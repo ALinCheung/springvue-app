@@ -19,8 +19,8 @@ import javax.mail.internet.MimeUtility;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -132,7 +132,7 @@ public class MailUtils {
     /**
      * 处理收件箱邮件
      */
-    public static void handleReceived(ImapMailProperties properties, BiPredicate<String, Date> predicate, Consumer<ImapMail> consumer) {
+    public static void handleReceived(ImapMailProperties properties, Predicate<MimeMessage> predicate, Consumer<ImapMail> consumer) {
         List<Message> inboxMessage = new ArrayList<>();
         Folder folder = null;
         Folder historyFolder = null;
@@ -189,7 +189,7 @@ public class MailUtils {
     private static void getMessage(ImapMailProperties properties,
                                    List<Message> inboxMessage, Folder folder,
                                    Integer start,
-                                   BiPredicate<String, Date> predicate,
+                                   Predicate<MimeMessage> predicate,
                                    Consumer<ImapMail> consumer) throws Exception {
         int end = start + properties.getBatchCount() - 1;
         Message[] messages = folder.getMessages(start, Math.min(end, folder.getMessageCount()));
@@ -202,7 +202,7 @@ public class MailUtils {
             for (Message o : messages) {
                 MimeMessage msg = (MimeMessage) o;
                 // 自定义判断条件
-                if (msg.getMessageID() != null && predicate != null && predicate.test(msg.getMessageID(), MailUtils.getDate(msg))) {
+                if (msg.getMessageID() != null && predicate != null && predicate.test(msg)) {
                     matchMsgList.add(msg);
                 }
             }
@@ -291,7 +291,7 @@ public class MailUtils {
      * @param part 邮件内容
      * @return 邮件中存在附件返回true，不存在返回false
      */
-    private static boolean isContainAttachment(Part part) throws Exception {
+    public static boolean isContainAttachment(Part part) throws Exception {
         boolean flag = false;
         if (part.isMimeType("multipart/*")) {
             MimeMultipart multipart = (MimeMultipart) part.getContent();
