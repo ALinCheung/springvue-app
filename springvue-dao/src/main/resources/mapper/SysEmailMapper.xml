@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springvue.app.dao.mapper.SysEmailMapper">
+
+    <resultMap id="BaseResultMap" type="com.springvue.app.dao.model.po.SysEmailPo">
+            <id property="id" column="ID" jdbcType="INTEGER"/>
+            <result property="messageId" column="MESSAGE_ID" jdbcType="VARCHAR"/>
+            <result property="sender" column="SENDER" jdbcType="VARCHAR"/>
+            <result property="receivers" column="RECEIVERS" jdbcType="VARCHAR"/>
+            <result property="msgType" column="MSG_TYPE" jdbcType="INTEGER"/>
+            <result property="title" column="TITLE" jdbcType="VARCHAR"/>
+            <result property="content" column="CONTENT" jdbcType="VARCHAR"/>
+            <result property="attachments" column="ATTACHMENTS" jdbcType="VARCHAR"/>
+            <result property="createUser" column="CREATE_USER" jdbcType="VARCHAR"/>
+            <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,MESSAGE_ID,SENDER,
+        RECEIVERS,MSG_TYPE,TITLE,
+        CONTENT,ATTACHMENTS,CREATE_USER,
+        CREATE_TIME
+    </sql>
+    <select id="selectAllByTitle" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from SYS_EMAIL
+        where
+        TITLE = #{title,jdbcType=VARCHAR}
+    </select>
+</mapper>

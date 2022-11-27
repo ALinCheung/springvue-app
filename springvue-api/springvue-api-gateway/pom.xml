@@ -11,6 +11,7 @@
 
 	<artifactId>springvue-api-gateway</artifactId>
 	<packaging>jar</packaging>
+	<description>项目接口网关模块</description>
 
 	<properties>
 		<main>com.springvue.app.api.gateway.Application</main>

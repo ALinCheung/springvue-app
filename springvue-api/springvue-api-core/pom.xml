@@ -8,5 +8,6 @@
     <artifactId>springvue-api-core</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+    <description>项目接口核心模块</description>
 
 </project>

@@ -11,6 +11,7 @@
 
     <artifactId>springvue-api</artifactId>
     <packaging>pom</packaging>
+    <description>项目接口父模块</description>
 
     <modules>
         <module>springvue-api-gateway</module>

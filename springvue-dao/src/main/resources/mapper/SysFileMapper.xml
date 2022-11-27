@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springvue.app.dao.mapper.SysFileMapper">
+
+    <resultMap id="BaseResultMap" type="com.springvue.app.dao.model.po.SysFilePo">
+            <id property="id" column="ID" jdbcType="INTEGER"/>
+            <result property="fileName" column="FILE_NAME" jdbcType="VARCHAR"/>
+            <result property="fileSuffix" column="FILE_SUFFIX" jdbcType="VARCHAR"/>
+            <result property="filePath" column="FILE_PATH" jdbcType="VARCHAR"/>
+            <result property="isTemp" column="IS_TEMP" jdbcType="INTEGER"/>
+            <result property="createUser" column="CREATE_USER" jdbcType="VARCHAR"/>
+            <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+            <result property="updateUser" column="UPDATE_USER" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="UPDATE_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,FILE_NAME,FILE_SUFFIX,
+        FILE_PATH,IS_TEMP,CREATE_USER,
+        CREATE_TIME,UPDATE_USER,UPDATE_TIME
+    </sql>
+</mapper>

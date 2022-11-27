@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <artifactId>springvue-repository</artifactId>
+    <description>项目仓库模块</description>
 
     <build>
         <plugins>

@@ -11,6 +11,7 @@
 
     <artifactId>springvue-server</artifactId>
     <packaging>jar</packaging>
+    <description>项目网站服务模块</description>
 
     <properties>
         <main>com.springvue.app.server.Application</main>
@@ -23,13 +24,13 @@
             <artifactId>springvue-ui</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- 同项目common -->
+        <!-- 数据访问模块 -->
         <dependency>
             <groupId>com.springvue.app</groupId>
-            <artifactId>springvue-common</artifactId>
+            <artifactId>springvue-dao</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- 同项目Api接口核心 -->
+        <!-- Api核心模块 -->
         <dependency>
             <groupId>com.springvue.app</groupId>
             <artifactId>springvue-api-core</artifactId>

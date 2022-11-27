@@ -11,16 +11,17 @@
 
     <artifactId>springvue-api-demo</artifactId>
     <packaging>jar</packaging>
+    <description>项目接口示例模块</description>
 
     <properties>
         <main>com.springvue.app.api.demo.Application</main>
     </properties>
 
     <dependencies>
-        <!-- 公共模块 -->
+        <!-- 数据访问模块 -->
         <dependency>
             <groupId>com.springvue.app</groupId>
-            <artifactId>springvue-common</artifactId>
+            <artifactId>springvue-dao</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- Api核心模块 -->
