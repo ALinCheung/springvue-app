@@ -31,6 +31,13 @@ public class ExecutorUtils {
     public static ExecutorService executor = ThreadUtil.newExecutor(1, 10);
 
     /**
+     * 执行线程
+     */
+    public static void execute(Runnable command) {
+        ExecutorUtils.executor.execute(command);
+    }
+
+    /**
      * 线程锁
      */
     public static void lock(Consumer<Void> consumer) {
