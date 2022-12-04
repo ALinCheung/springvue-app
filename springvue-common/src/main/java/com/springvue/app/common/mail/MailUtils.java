@@ -213,7 +213,7 @@ public class MailUtils {
             if (!matchMsgList.isEmpty()) {
                 for (MimeMessage message : matchMsgList) {
                     try {
-                        // 初始化邮件信息
+                        // 初始化邮件信息, 会保存文件, 需要再consumer里自行删除附件
                         ImapMail mail = MailUtils.initEmail(properties, message);
                         log.info("当前处理邮件标题[{}], 邮件时间[{}]", mail.getTitle(), DatePattern.NORM_DATETIME_FORMAT.format(mail.getCreateTime()));
                         // 自定义处理逻辑

@@ -1,6 +1,7 @@
 package com.springvue.app.server.controller;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.springvue.app.common.constants.enums.MsgType;
 import com.springvue.app.common.mail.MailUtils;
@@ -44,6 +45,10 @@ public class TaskController {
                             sysEmailVo.setMsgType(MsgType.EMAIL_RECEIVE.getCode());
                             sysEmailVo.setReceivers(CollectionUtil.newArrayList(imapMail.getReceiver()));
                             sysEmailService.save(sysEmailVo);
+                        } else if (CollectionUtil.isNotEmpty(imapMail.getAttachments())) {
+                            for (String attachment : imapMail.getAttachments()) {
+                                FileUtil.del(attachment);
+                            }
                         }
                     });
         });
