@@ -148,8 +148,9 @@ public class MailUtils {
                 // 获取邮件数量
                 log.info("收件箱[{}]中共[{}]封邮件!", properties.getUsername(), folder.getMessageCount());
                 Integer start = 1;
+                Integer handleSize = 0;
                 // 获取未处理的邮件入库
-                MailUtils.getMessage(properties, inboxMessage, folder, start, predicate, consumer);
+                handleSize = MailUtils.getMessage(properties, inboxMessage, folder, start, handleSize, predicate, consumer);
                 // 收件箱超过30封后移动到历史邮箱
                 if (historyFolder != null && properties.getInBoxCount() != null && !inboxMessage.isEmpty()) {
                     // 按时间排序
@@ -166,6 +167,7 @@ public class MailUtils {
                         }
                     }
                 }
+                log.info("收件箱处理结束, 共[{}]封邮件, 符合条件且处理[{}]封!", folder.getMessageCount(), handleSize);
             }
         } catch (Exception e) {
             log.error("处理收件箱邮件异常, 原因: {}", e.getMessage(), e);
@@ -186,11 +188,12 @@ public class MailUtils {
     /**
      * 获取未处理的邮件入库
      */
-    private static void getMessage(ImapMailProperties properties,
-                                   List<Message> inboxMessage, Folder folder,
-                                   Integer start,
-                                   Predicate<MimeMessage> predicate,
-                                   Consumer<ImapMail> consumer) throws Exception {
+    private static Integer getMessage(ImapMailProperties properties,
+                                      List<Message> inboxMessage, Folder folder,
+                                      Integer start,
+                                      Integer handleSize,
+                                      Predicate<MimeMessage> predicate,
+                                      Consumer<ImapMail> consumer) throws Exception {
         int end = start + properties.getBatchCount() - 1;
         Message[] messages = folder.getMessages(start, Math.min(end, folder.getMessageCount()));
         // 过滤邮件
@@ -212,21 +215,31 @@ public class MailUtils {
                     try {
                         // 初始化邮件信息
                         ImapMail mail = MailUtils.initEmail(properties, message);
+                        log.info("当前处理邮件标题[{}], 邮件时间[{}]", mail.getTitle(), DatePattern.NORM_DATETIME_FORMAT.format(mail.getCreateTime()));
                         // 自定义处理逻辑
                         if (consumer != null) {
                             consumer.accept(mail);
                         }
                     } catch (Exception e) {
-                        log.error("处理邮箱[{}]邮件[{}]异常, 继续执行下一封, 原因: {}", ((InternetAddress) message.getFrom()[0]).getAddress(), MimeUtility.decodeText(message.getSubject()), e.getMessage(), e);
+                        log.error("处理邮箱[{}]邮件[{}]异常, 继续执行下一封, 原因: {}", getSender(message), MimeUtility.decodeText(message.getSubject()), e.getMessage(), e);
                     }
                 }
+                handleSize += matchMsgList.size();
                 log.info("循环处理邮件[{}]封, 符合条件邮件[{}]封!", messages.length, matchMsgList.size());
             }
             // 如果获取数少于收件箱数继续循环
             if (end < folder.getMessageCount()) {
-                MailUtils.getMessage(properties, inboxMessage, folder, start + properties.getBatchCount(), predicate, consumer);
+                handleSize = MailUtils.getMessage(properties, inboxMessage, folder, start + properties.getBatchCount(), handleSize, predicate, consumer);
             }
         }
+        return handleSize;
+    }
+
+    /**
+     * 获取邮件发送人
+     */
+    public static String getSender(MimeMessage msg) throws Exception {
+        return ((InternetAddress) msg.getFrom()[0]).getAddress();
     }
 
     /**
@@ -266,7 +279,7 @@ public class MailUtils {
      */
     private static ImapMail initEmail(ImapMailProperties properties, MimeMessage msg) throws Exception {
         // 装载邮件信息
-        String sender = ((InternetAddress) msg.getFrom()[0]).getAddress();
+        String sender = getSender(msg);
         ImapMail mail = new ImapMail();
         BeanUtils.copyProperties(properties, mail);
         mail.setMessageId(msg.getMessageID());
@@ -277,7 +290,7 @@ public class MailUtils {
         mail.setCreateTime(MailUtils.getDate(msg));
         if (StringUtils.isNotBlank(properties.getAttachmentDir()) && isContainAttachment(msg)) {
             List<String> attachments = new ArrayList<>();
-            String dir = properties.getAttachmentDir() + DatePattern.NORM_DATE_FORMAT.format(MailUtils.getDate(msg)) + "/" + sender.replace(".", "_") + "/";
+            String dir = properties.getAttachmentDir() + "/" + DatePattern.NORM_DATE_FORMAT.format(MailUtils.getDate(msg)) + "/" + sender.replace(".", "_") + "/";
             // 保存附件
             saveAttachment(mail, msg, dir, attachments);
             mail.setAttachments(attachments);
@@ -340,18 +353,18 @@ public class MailUtils {
     private static void getMailTextContent(Part part, StringBuffer content) throws Exception {
         //如果是文本类型的附件，通过getContent方法可以取到文本内容，但这不是我们需要的结果，所以在这里要做判断
         boolean isContainTextAttach = part.getContentType().indexOf("name") > 0;
-        if (part.getContent() != null) {
-            if (part.isMimeType("text/*") && !isContainTextAttach) {
+        if (part.isMimeType("text/*") && !isContainTextAttach) {
+            if (part.getContent() != null && part.getContent() instanceof String) {
                 content.append(part.getContent().toString());
-            } else if (part.isMimeType("message/rfc822")) {
-                getMailTextContent((Part) part.getContent(), content);
-            } else if (part.isMimeType("multipart/*")) {
-                Multipart multipart = (Multipart) part.getContent();
-                int partCount = multipart.getCount();
-                for (int i = 0; i < partCount; i++) {
-                    BodyPart bodyPart = multipart.getBodyPart(i);
-                    getMailTextContent(bodyPart, content);
-                }
+            }
+        } else if (part.isMimeType("message/rfc822")) {
+            getMailTextContent((Part) part.getContent(), content);
+        } else if (part.isMimeType("multipart/*")) {
+            Multipart multipart = (Multipart) part.getContent();
+            int partCount = multipart.getCount();
+            for (int i = 0; i < partCount; i++) {
+                BodyPart bodyPart = multipart.getBodyPart(i);
+                getMailTextContent(bodyPart, content);
             }
         }
     }

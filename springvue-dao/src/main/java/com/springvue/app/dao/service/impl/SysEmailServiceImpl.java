@@ -28,7 +28,7 @@ public class SysEmailServiceImpl extends ServiceImpl<SysEmailMapper, SysEmailPo>
         implements SysEmailService {
 
     @Autowired
-    private SysFileService sysFileService;
+    private SysFileServiceImpl sysFileService;
 
     @Override
     public void save(SysEmailVo vo) {
