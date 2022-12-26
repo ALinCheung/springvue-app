@@ -23,7 +23,7 @@ public class Swagger {
                         .version("1.0")
                         .build())
                 //分组名称
-                .groupName("2.X版本")
+                .groupName("springvue-app-server")
                 .select()
                 //这里指定Controller扫描包路径
                 .apis(RequestHandlerSelectors.basePackage("com.springvue.app.server.controller"))
