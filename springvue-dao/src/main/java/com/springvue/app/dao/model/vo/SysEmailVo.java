@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class SysEmailVo implements Serializable {
@@ -27,9 +28,9 @@ public class SysEmailVo implements Serializable {
     private String sender;
 
     /**
-     * 收件人, 用逗号隔开
+     * 收件人列表
      */
-    private String receivers;
+    private List<String> receivers;
 
     /**
      * 邮件类型1为发送2为接收
@@ -47,9 +48,9 @@ public class SysEmailVo implements Serializable {
     private String content;
 
     /**
-     * 附件编码, 用逗号隔开
+     * 附件路径列表
      */
-    private String attachments;
+    private List<String> attachments;
 
     /**
      * 创建人

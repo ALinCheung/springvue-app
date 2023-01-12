@@ -14,14 +14,12 @@ public class MyBatisPlusHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("插入时自动填充...");
         this.strictInsertFill(metaObject,"createTime", LocalDateTime.class,LocalDateTime.now(ZoneId.of("Asia/Shanghai")));
         // TODO 扩展createUser
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        log.info("更新时自动填充...");
         this.strictInsertFill(metaObject,"updateTime", LocalDateTime.class,LocalDateTime.now(ZoneId.of("Asia/Shanghai")));
         // TODO 扩展updateUser
     }

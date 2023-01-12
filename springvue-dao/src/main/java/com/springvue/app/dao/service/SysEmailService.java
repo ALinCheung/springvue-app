@@ -2,6 +2,7 @@ package com.springvue.app.dao.service;
 
 import com.springvue.app.dao.model.po.SysEmailPo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.springvue.app.dao.model.vo.SysEmailVo;
 
 /**
 * 
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SysEmailService extends IService<SysEmailPo> {
 
+    void save(SysEmailVo vo);
 }
