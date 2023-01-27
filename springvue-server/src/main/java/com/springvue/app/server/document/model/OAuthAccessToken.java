@@ -26,9 +26,9 @@ public class OAuthAccessToken {
     @ApiModelProperty(value = "用户姓名")
     private String name;
 
-    @ApiModelProperty(value = "许可证", example = "agile")
+    @ApiModelProperty(value = "许可证")
     private String license;
 
-    @ApiModelProperty(value = "域", example = "agile")
+    @ApiModelProperty(value = "域")
     private String domain;
 }

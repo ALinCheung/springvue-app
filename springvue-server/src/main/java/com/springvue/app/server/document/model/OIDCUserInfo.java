@@ -1,6 +1,5 @@
 package com.springvue.app.server.document.model;
 
-import com.agile.sso.common.model.Oauth2UserInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,9 +15,6 @@ public class OIDCUserInfo {
 
     @ApiModelProperty(value = "令牌")
     private OIDCAccessToken accessToken;
-
-    @ApiModelProperty(value = "用户信息")
-    private Oauth2UserInfo userinfo;
 
     @ApiModel(description = "OIDC访问令牌")
     @Data

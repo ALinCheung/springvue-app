@@ -1,9 +1,8 @@
 package com.springvue.app.server.document;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.agile.sso.auth.doc.model.*;
-import com.agile.sso.auth.model.OIDCOpenidConfig;
 import com.fasterxml.classmate.TypeResolver;
+import com.springvue.app.server.document.model.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

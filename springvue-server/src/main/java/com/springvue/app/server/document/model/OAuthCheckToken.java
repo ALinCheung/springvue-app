@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class OAuthCheckToken {
 
-    @ApiModelProperty(value = "许可证", example = "agile")
+    @ApiModelProperty(value = "许可证")
     private String license;
 
     @ApiModelProperty(value = "资源列表")
@@ -22,7 +22,7 @@ public class OAuthCheckToken {
     @ApiModelProperty(value = "权限列表")
     private List<String> scope;
 
-    @ApiModelProperty(value = "域", example = "agile")
+    @ApiModelProperty(value = "域")
     private String domain;
 
     @ApiModelProperty(value = "用户姓名")
@@ -37,6 +37,6 @@ public class OAuthCheckToken {
     @ApiModelProperty(value = "角色列表")
     private List<String> authorities;
 
-    @ApiModelProperty(value = "客户端编码", example = "agile")
+    @ApiModelProperty(value = "客户端编码")
     private String client_id;
 }
