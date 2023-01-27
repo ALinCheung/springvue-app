@@ -17,6 +17,7 @@
     "element-plus": "^2.2.19",
     "vue": "^3.2.41",
     "vue-router": "4",
+    "vue3-puzzle-vcode": "^1.0.8",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
