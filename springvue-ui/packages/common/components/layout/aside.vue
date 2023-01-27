@@ -26,6 +26,10 @@ const menus: Array<MenuItem> = [
     path: "/uploadByPieces",
     title: "分片上传",
   },
+  {
+    path: "/puzzleVcode",
+    title: "验证码",
+  },
 ];
 const router = useRouter() as Router;
 const handleMenu = (menuItem: MenuItem) => {
