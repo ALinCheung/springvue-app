@@ -32,19 +32,6 @@ const dynamicRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
-  {
-    path: "/puzzleVcode",
-    component: layout,
-    children: [
-      {
-        path: "",
-        component: () => import("@/views/puzzleVcode.vue"),
-        meta: {
-          title: "验证码",
-        },
-      },
-    ],
-  },
 ];
 
 const router = createRouter({
