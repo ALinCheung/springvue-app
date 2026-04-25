@@ -1,61 +1,95 @@
 # SpringVue-App
 
-> 一个快速搭建SpringBoot + Vue基座项目
+一个快速搭建 Spring Boot + Vue 基座项目。
+
+## 特性
+
+- Spring Boot 2.3.x 后端 + Vue 3 前端
+- 微服务架构支持（Spring Gateway + Nacos）
+- Lerna 多包管理
+- Maven 前端构建集成
+- H2 本地数据库
+- RESTful API 文档（Knife4j）
 
 ## 技术栈
 
-### 父端
+### 后端
 
-主要技术：
-
-- Java 11 后端环境
-- Maven 3.6.x 工程项目构建工具
-- Nodejs 16 前端环境
-- Npm 8/Yarn 1.2 包管理工具
-- Lerna 项目管理工具
-- com.github.eirslett.frontend-maven-plugin 前端构建工具
-- org.codehaus.mojo.appassembler-maven-plugin jar打包启动脚本构建工具
-- maven-assembly-plugin 压缩打包工具
+| 技术 | 说明 |
+| ---- | ---- |
+| Spring Boot 2.3.x | 框架 |
+| Spring Gateway | 网关 |
+| Nacos | 配置中心/服务发现 |
+| MyBatis-Plus | ORM |
+| H2 | 嵌入式数据库 |
+| Lombok | 注解 |
+| Hutool | 工具集 |
+| EasyExcel | Excel 处理 |
+| Knife4j | API 文档 |
 
 ### 前端
 
-主要技术：
+| 技术 | 说明 |
+| ---- | ---- |
+| Vue 3 | 框架 |
+| Vite 3 | 构建工具 |
+| Element Plus | 组件库 |
+| Vue Router | 路由 |
+| Vuex | 状态管理 |
+| Axios | HTTP 客户端 |
+| TypeScript | 类型 |
 
-- Vite 3 构建工具
-- Vue 3 前端框架
-- Vue-router 路由组件
-- Vuex 状态管理组件
-- Element-plus 前端组件
-- Axios 网络请求库
-- Bable 语法兼容
-- Eslint 代码规范控制
-- Prettier 美化代码
-- Postcss Css浏览器兼容
-- TypeScript 3 类型控制
-- Terser 代码压缩
+### 构建工具
 
-### 后端
+| 技术 | 说明 |
+| ---- | ---- |
+| Maven 3.6.x | Java 构建 |
+| Lerna | 多包管理 |
+| frontend-maven-plugin | 前端集成 |
+| appassembler-maven-plugin | 打包 |
 
-主要技术：
+## 快速开始
 
-- Spring Boot 2.3.x 构建工具
-- Spring Gateway 网关组件
-- Knife4j Swagger2 Restful Api文档工具
-- Nacos 配置中心/服务中心
-- H2 Datasource 本地数据库
-- Mybatis-plus 数据访问框架
-- Lombok Java代码注解工具
-- Hutool 公共工具类库
-- Fastjson Json工具
-- EasyExcel Excel工具
-- Javacsv Csv工具
-- commons-pool2/common-net/jsch Ftp工具
-- Kaptcha 验证码工具
+### 环境要求
 
-### 1. 命令
+- Java 11+
+- Maven 3.6.x
+- Node.js 16+
+- npm 8+ / Yarn 1.2+
 
-打包, 根目录执行
+### 构建
 
-```
+```bash
 mvn clean install -Dmaven.test.skip=true
 ```
+
+### 运行
+
+启动后端：
+
+```bash
+cd springvue-admin && mvn spring-boot:run
+```
+
+启动前端：
+
+```bash
+cd springvue-ui && npm run dev
+```
+
+## 项目结构
+
+```
+springvue-app
+├── springvue-admin        # 后端服务
+├── springvue-common    # 公共模块
+├── springvue-gateway   # 网关服务
+└── springvue-ui       # 前端项目
+    └── packages
+        ├── frame     # 框架包
+        └── portal   # 门户包
+```
+
+## 许可证
+
+MIT
