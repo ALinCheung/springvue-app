@@ -38,7 +38,7 @@
 
 主要技术：
 
-- SpringBoot 5 构建工具
+- Spring Boot 2.3.x 构建工具
 - Spring Gateway 网关组件
 - Knife4j Swagger2 Restful Api文档工具
 - Nacos 配置中心/服务中心
