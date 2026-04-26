@@ -1,34 +1,21 @@
 package com.springvue.app.api.demo;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @Configuration
-@EnableSwagger2WebMvc
 public class Swagger {
 
-    @Bean(value = "defaultApi2")
-    public Docket defaultApi2() {
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(new ApiInfoBuilder()
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
                         .title("微服务示例应用")
-                        .description("# swagger-bootstrap-ui RESTful APIs")
-                        .termsOfServiceUrl("http://www.xx.com/")
+                        .description("# RESTful APIs")
                         .version("1.0")
-                        .build())
-                //分组名称
-                .groupName("2.X版本")
-                .select()
-                //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.springvue.app.api.demo.controller"))
-                .paths(PathSelectors.any())
-                .build();
-        return docket;
+                        .contact(new Contact().name("xx.com").url("http://www.xx.com/")));
     }
 }

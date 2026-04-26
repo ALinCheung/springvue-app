@@ -1,10 +1,10 @@
 package com.springvue.app.common.sharding;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.shardingsphere.api.config.sharding.KeyGeneratorConfiguration;
-import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;
-import org.apache.shardingsphere.api.config.sharding.TableRuleConfiguration;
-import org.apache.shardingsphere.api.config.sharding.strategy.StandardShardingStrategyConfiguration;
+import org.apache.shardingsphere.sharding.api.config.KeyGeneratorConfiguration;
+import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
+import org.apache.shardingsphere.sharding.api.config.rule.TableRuleConfiguration;
+import org.apache.shardingsphere.sharding.api.config.strategy.standard.StandardShardingStrategyConfiguration;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -26,7 +26,7 @@ public class ShardingUtils {
         properties.setProperty("worker.id", randomWorkerId + "");
         KeyGeneratorConfiguration keyGeneratorConfiguration =
                 new KeyGeneratorConfiguration("SNOWFLAKE", "id", properties);
-        configuration.setDefaultKeyGeneratorConfig(keyGeneratorConfiguration);
+        configuration.setDefaultKeyGeneratorConfiguration(keyGeneratorConfiguration);
     }
 
     /**
@@ -35,11 +35,11 @@ public class ShardingUtils {
     public static void configTable(ShardingRuleConfiguration configuration,
                                    DataSource dataSource, String logicTable, String column, String actualDataNodes) {
         TableRuleConfiguration tableRuleConfiguration = new TableRuleConfiguration(logicTable, actualDataNodes);
-        tableRuleConfiguration.setTableShardingStrategyConfig(
+        tableRuleConfiguration.setTableShardingStrategy(
                 new StandardShardingStrategyConfiguration(
                         column, new DynamicTablePreciseShardingAlgorithm(dataSource, logicTable)));
 
-        configuration.getTableRuleConfigs().add(tableRuleConfiguration);
+        configuration.getTableRules().add(tableRuleConfiguration);
     }
 
     /**

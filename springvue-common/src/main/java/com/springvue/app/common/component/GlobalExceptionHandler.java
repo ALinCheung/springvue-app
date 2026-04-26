@@ -2,8 +2,8 @@ package com.springvue.app.common.component;
 
 import com.springvue.app.common.wrapper.BusinessException;
 import com.springvue.app.common.model.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.HandlerMethod;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -116,19 +116,17 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 获取控制器方法上的swagger注解/方法名
+     * 获取控制器方法上的OpenAPI注解/方法名
      * @param method
      * @return
      */
     private String getMethodSchema(HandlerMethod method) {
         StringBuilder msg = new StringBuilder();
         // 获取类名
-        Api api = AnnotationUtils.findAnnotation(method.getBeanType(), Api.class);
-        if (api != null) {
-            if (StringUtils.isNotBlank(api.value())) {
-                msg.append(api.value());
-            } else if (api.tags().length > 0) {
-                msg.append(api.tags()[0]);
+        Tag tag = AnnotationUtils.findAnnotation(method.getBeanType(), Tag.class);
+        if (tag != null) {
+            if (StringUtils.isNotBlank(tag.name())) {
+                msg.append(tag.name());
             } else {
                 msg.append(method.getBeanType().getName());
             }
@@ -137,12 +135,10 @@ public class GlobalExceptionHandler {
         }
         msg.append("-");
         // 获取方法名
-        ApiOperation apiOperation = AnnotationUtils.findAnnotation(method.getMethod(), ApiOperation.class);
-        if (apiOperation != null) {
-            if (StringUtils.isNotBlank(apiOperation.value())) {
-                msg.append(apiOperation.value());
-            } else if (apiOperation.tags().length > 0) {
-                msg.append(apiOperation.tags()[0]);
+        Operation operation = AnnotationUtils.findAnnotation(method.getMethod(), Operation.class);
+        if (operation != null) {
+            if (StringUtils.isNotBlank(operation.summary())) {
+                msg.append(operation.summary());
             } else {
                 msg.append(method.getMethod().getName());
             }

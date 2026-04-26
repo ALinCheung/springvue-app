@@ -10,15 +10,15 @@ import com.springvue.app.dao.model.po.SysEmailPo;
 import com.springvue.app.dao.model.vo.SysEmailVo;
 import com.springvue.app.dao.service.impl.SysEmailServiceImpl;
 import com.springvue.app.server.config.ImapProperties;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "任务模块")
+@Tag(name = "任务模块")
 @RestController("/task")
 public class TaskController {
 
@@ -28,7 +28,7 @@ public class TaskController {
     @Autowired
     private SysEmailServiceImpl sysEmailService;
 
-    @ApiOperation(value = "获取邮件")
+    @Operation(summary = "获取邮件")
     @PostMapping("/receiveEmail")
     @Scheduled(fixedDelay = 5 * 60 * 1000L)
     public void receiveEmail() {

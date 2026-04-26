@@ -3,8 +3,7 @@ package com.springvue.app.common.model;
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,20 +15,20 @@ import java.util.function.Function;
 /**
  * 分页查询参数
  */
-@ApiModel(description = "分页查询入参")
+@Schema(description = "分页查询入参")
 @Data
 @Accessors(chain = true)
 public class PageParams<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "当前页", example = "1")
+    @Schema(description = "当前页", example = "1")
     private int current = 1;
 
-    @ApiModelProperty(value = "每页记录数", example = "20")
+    @Schema(description = "每页记录数", example = "20")
     private int size = 20;
 
-    @ApiModelProperty("排序规则")
+    @Schema(description = "排序规则")
     private List<OrderItem> orders;
 
     private T param;

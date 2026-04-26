@@ -19,6 +19,12 @@
 
     <dependencies>
         <!-- 数据访问模块 -->
+        <!-- 启用 bootstrap.yml -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!-- 数据访问模块 -->
         <dependency>
             <groupId>com.springvue.app</groupId>
             <artifactId>springvue-dao</artifactId>

@@ -1,38 +1,37 @@
 package com.springvue.app.server.document.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.List;
 
-@ApiModel(description = "OIDC用户信息")
+@Schema(description = "OIDC用户信息")
 @Data
 public class OIDCUserInfo {
 
-    @ApiModelProperty(value = "身份标识")
+    @Schema(description = "身份标识")
     private String sub;
 
-    @ApiModelProperty(value = "令牌")
+    @Schema(description = "令牌")
     private OIDCAccessToken accessToken;
 
-    @ApiModel(description = "OIDC访问令牌")
+    @Schema(description = "OIDC访问令牌")
     @Data
     class OIDCAccessToken {
 
-        @ApiModelProperty(value = "令牌值")
+        @Schema(description = "令牌值")
         private String tokenValue;
 
-        @ApiModelProperty(value = "创建秒数")
+        @Schema(description = "创建秒数")
         private String issuedAt;
 
-        @ApiModelProperty(value = "过期秒数")
+        @Schema(description = "过期秒数")
         private String expiresAt;
 
-        @ApiModelProperty(value = "令牌类型")
+        @Schema(description = "令牌类型")
         private String tokenType;
 
-        @ApiModelProperty(value = "OAuth范围")
+        @Schema(description = "OAuth范围")
         private List<String> scopes;
     }
 }
